@@ -1,28 +1,56 @@
-const inquirer = require('inquirer');
+const { prompt } = require('inquirer');
 const logo = require('asciiart-logo');
 const db = require('./db');
 
 init();
 
-function startApp() {
-    inquirer
-        .createPromptModule([
-            {
-                type: 'list',
-                name: 'action',
-                message: 'What would you like to do?',
-                choices: [
-                    'View all departments',
-                    'View all roles',
-                    'View all employees',
-                    'Add a department',
-                    'Add a role',
-                    'Add an employee',
-                    'Update an employee role',
-                    'Exit',
-                ],
-            },
-        ])
+function init() {
+    const logoText = logo({ name: "Employee Tracker" }).render();
+
+    console.log(logoText);
+
+    loadMainPrompts();
+}
+
+function loadMainPrompts() {
+    prompt([
+        {
+            type: 'list',
+            name: 'action',
+            message: 'What would you like to do?',
+            choices: [
+                {
+                    name: 'View all departments',
+                    value: 'VIEW_DEPARTMENTS'
+                },
+                {
+                    name: 'View all roles',
+                    value: 'VIEW_ROLES'
+                },
+                {
+                    name: 'View all employees',
+                    value: 'VIEW_EMPLOYEES'
+                },
+                {
+                    name: 'Add department',
+                    value: 'ADD_DEPARTMENT'
+                },
+                {
+                    name: 'Add role',
+                    value: 'ADD_ROLE'
+                },
+                {
+                    name: 'Add employee',
+                    value: 'ADD_EMPLOYEE'
+                },
+                {
+                    name: 'Update employee role',
+                    value: 'UPDATE_EMPLOYEE_ROLE'
+                },
+
+            ],
+        },
+    ])
         .then((answers) => {
             switch (answers.action) {
                 case 'View all departments':
@@ -33,6 +61,15 @@ function startApp() {
                     break;
                 case 'View all employees':
                     viewAllEmployees();
+                    break;
+                case 'View all employees by department':
+                    addDepartment();
+                    break;
+                case 'View all employees by manager':
+                    addDepartment();
+                    break;
+                case 'View total utilized budget by department':
+                    addDepartment();
                     break;
                 case 'Add a department':
                     addDepartment();
@@ -45,6 +82,18 @@ function startApp() {
                     break;
                 case 'Update an employee role':
                     updateEmployeeRole();
+                    break;
+                case 'Update an employee manager':
+                    updateEmployeeManager();
+                    break;
+                case 'Remove department':
+                    RemoveDepartment();
+                    break;
+                case 'Remove role':
+                    RemoveRole();
+                    break;
+                case 'Remove employee':
+                    RemoveEmployee();
                     break;
                 case 'Exit':
                     connection.end();
