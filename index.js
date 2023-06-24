@@ -1,16 +1,16 @@
 const { prompt } = require('inquirer');
-const logo = require('asciiart-logo');
+// const logo = require('asciiart-logo');
 const db = require('./db');
 
-init();
+// init();
 
-function init() {
+ /* function init() {
     const logoText = logo({ name: "Employee Tracker" }).render();
 
     console.log(logoText);
 
     loadMainPrompts();
-}
+} */
 
 function loadMainPrompts() {
     prompt([
@@ -248,7 +248,7 @@ function addDepartment() {
 function addRole() {
     db.findAllDepartments()
         .then(([rows]) => {
-            let departmnets = rows;
+            let departments = rows;
             const departmentChoices = departments.map(({ id, name }) => ({
                 name: name,
                 value: id
@@ -364,7 +364,7 @@ function updateEmployeeRole() {
                 }
             ])
                 .then(res => {
-                    let employeeid = res.employeeId;
+                    let employeeId = res.employeeId;
                     db.findAllRoles()
                         .then(([rows]) => {
                             let roles = rows;
@@ -470,33 +470,33 @@ function removeRole() {
                     choices: roleChoices
                 }
             ])
-            .then(res => db.removeRole(res.roleId))
-            .then(() => console.log('Removed role from the  database'))
-            .then(() => loadMainPrompts())
+                .then(res => db.removeRole(res.roleId))
+                .then(() => console.log('Removed role from the  database'))
+                .then(() => loadMainPrompts())
         })
 }
 
 function removeEmployee() {
     db.findAllEmlpoyees()
-    .then(([rows]) => {
-        let employees = rows;
-        const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
-            name: `${first_name} ${last_name}`,
-            value: id
-        }));
+        .then(([rows]) => {
+            let employees = rows;
+            const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
+                name: `${first_name} ${last_name}`,
+                value: id
+            }));
 
-        prompt([
-            {
-                type: 'list',
-                name: 'employeeId',
-                message: 'Which employee do you want to remove?',
-                choices: employeeChoices
-            }
-        ])
-        .then(res => db.removeEmployee(res.employeeId))
-        .then(() => console.log('Removed employee from the database'))
-        .then(() => loadMainPrompts())
-    })
+            prompt([
+                {
+                    type: 'list',
+                    name: 'employeeId',
+                    message: 'Which employee do you want to remove?',
+                    choices: employeeChoices
+                }
+            ])
+                .then(res => db.removeEmployee(res.employeeId))
+                .then(() => console.log('Removed employee from the database'))
+                .then(() => loadMainPrompts())
+        })
 }
 
 function quit() {
