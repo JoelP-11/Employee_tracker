@@ -1,7 +1,8 @@
 use employees_db;
 
-INSERT INTO department
-(name)
+DELETE FROM department;
+
+INSERT INTO department (name)
 VALUES 
 ('Marketing'),
 ('Accounting'),
@@ -18,17 +19,17 @@ VALUES
 ('Chief Financial Officer', 200000, 3),
 ('Financial Advisor', 120000, 3),
 ('Software Engineer', 130000, 4),
-('Full Stack Developer', 120000, 4),
+('Full Stack Developer', 120000, 4);
 
 INSERT INTO employee
 (first_name, last_name, role_id, manager_id)
 VALUES
-('Marjorie', 'Perez', 1, 2),
+('Marjorie', 'Perez', 1, NULL),
 ('Joel', 'Perez', 2, 1),
 ('Citlalli', 'Corona', 3, NULL),
-('Salvador', 'Perez', 4, 5),
+('Salvador', 'Perez', 4, 3),
 ('Denise', 'Gonzalez', 5, NULL),
-('Luis', 'Lopez', 6, NULL),
-('Kobe', 'Ortiz', 7, 6),
-('Vladislav', 'Zuev', 8, 3);
+('Luis', 'Lopez', 6, 5),
+('Kobe', 'Ortiz', 7, NULL),
+('Vladislav', 'Zuev', 8, 7);
 

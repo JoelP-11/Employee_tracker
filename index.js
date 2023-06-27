@@ -165,7 +165,7 @@ function viewEmployees() {
 }
 
 function viewEmployeesByDepartment() {
-    db.findAllDepaertments()
+    db.findAllDepartments()
         .then(([rows]) => {
             let departments = rows;
             const departmentChoices = departments.map(({ id, name }) => ({
@@ -202,7 +202,7 @@ function viewEmployeesByManager() {
                 {
                     type: 'list',
                     name: 'managerId',
-                    message: 'Which employee do youw ant to see direct reports for?',
+                    message: 'Which employee do you want to see direct reports for?',
                     choices: managerChoices
                 }
             ])
